@@ -129,7 +129,19 @@ export default function HeroScene({ motionActive, onExplore }: HeroSceneProps) {
             <span className="meta-val">GSAP 3 • SCROLLTRIGGER • PARALLAX</span>
           </div>
 
-          <div className="hero-scroll-cue" onClick={onExplore} role="button" tabIndex={0}>
+          <div
+            className="hero-scroll-cue"
+            onClick={onExplore}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                onExplore();
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label="Cuộn xuống để khám phá triển lãm"
+          >
             <span className="scroll-indicator-bar" />
             <span className="scroll-text">CUỘN ĐỂ KHÁM PHÁ</span>
           </div>
