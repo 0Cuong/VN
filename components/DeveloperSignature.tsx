@@ -29,13 +29,13 @@ export default function DeveloperSignature() {
 
       <div className="epilogue-content page-wrap">
         <div className="epilogue-header">
-          <span className="epilogue-tag">DẤU ẤN SÁNG TẠO // EXHIBITION EPILOGUE</span>
+          <span className="epilogue-tag">THÔNG TIN DỰ ÁN</span>
           <h2 className="epilogue-title">
             VIETNAM IN MOTION.<br />
-            <span className="font-serif text-accent">Crafted with GSAP & Passion.</span>
+            <span className="font-serif text-accent">Ảnh Việt Nam, chuyển động cùng GSAP.</span>
           </h2>
           <p className="epilogue-manifesto">
-            Một dự án thể nghiệm độc lập kết hợp giữa nghệ thuật nhiếp ảnh hiện thực và kỹ thuật motion frontend hiện đại. Mỗi dòng code chuyển động là một nhịp thở dành tặng vẻ đẹp trường tồn của đất nước hình chữ S.
+            Triển lãm ảnh về di sản, đô thị và đời sống Việt Nam, kết hợp hiệu ứng chuyển động trên web.
           </p>
         </div>
 
@@ -46,8 +46,8 @@ export default function DeveloperSignature() {
               <span>0C</span>
             </div>
             <div className="dev-titles">
-              <h3 className="dev-name">Crafted by 0Cuong</h3>
-              <p className="dev-role">Independent GSAP Motion Experiment & Frontend Showcase</p>
+              <h3 className="dev-name">Thực hiện bởi 0Cuong</h3>
+              <p className="dev-role">Triển lãm ảnh và hiệu ứng chuyển động với GSAP.</p>
             </div>
           </div>
 
@@ -70,7 +70,7 @@ export default function DeveloperSignature() {
               className="dev-link-btn btn-facebook"
             >
               <span className="btn-icon">✦</span>
-              <span>Facebook Chính Thức</span>
+              <span>Facebook</span>
               <span className="link-arrow">↗</span>
             </a>
 
@@ -79,7 +79,7 @@ export default function DeveloperSignature() {
               className="dev-link-btn btn-credits"
             >
               <span className="btn-icon">📷</span>
-              <span>Nguồn Ảnh & Giấy Phép Bản Quyền</span>
+              <span>Nguồn ảnh và giấy phép</span>
               <span className="link-arrow">↗</span>
             </button>
           </div>
@@ -93,7 +93,7 @@ export default function DeveloperSignature() {
           </div>
 
           <button className="back-to-top-btn" onClick={handleScrollTop} aria-label="Cuộn lên đầu trang">
-            <span>Trở về đầu trang</span>
+            <span>Về đầu trang</span>
             <span className="top-arrow">↑</span>
           </button>
         </div>
@@ -111,9 +111,9 @@ export default function DeveloperSignature() {
           <div className="credits-modal-card" onClick={(e: any) => e.stopPropagation()}>
             <div className="credits-modal-head">
               <div>
-                <h3 id="credits-title">Ghi nhận bản quyền nhiếp ảnh</h3>
+                <h3 id="credits-title">Nguồn ảnh và giấy phép</h3>
                 <p className="credits-sub">
-                  Tất cả tác phẩm nhiếp ảnh thực tế trong triển lãm đều được trích xuất từ Wikimedia Commons dưới giấy phép Creative Commons tự do hoặc Phạm vi Công cộng.
+                  Thông tin tác giả, giấy phép và nguồn của từng ảnh được liệt kê bên dưới.
                 </p>
               </div>
               <button
@@ -164,7 +164,7 @@ export default function DeveloperSignature() {
             </div>
 
             <div className="credits-modal-foot">
-              <p>Trân trọng cảm ơn các tác giả nhiếp ảnh đã ghi lại những khoảnh khắc chân thực và sống động về con người và đất nước Việt Nam.</p>
+              <p>Cảm ơn các tác giả đã cung cấp những bức ảnh trong triển lãm.</p>
               <button className="btn btn-primary" onClick={() => setShowCreditsModal(false)}>
                 Đóng
               </button>
