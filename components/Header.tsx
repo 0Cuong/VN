@@ -93,31 +93,31 @@ export default function Header({ motionActive, onToggleMotion }: HeaderProps) {
       {/* Mobile Drawer */}
       <div className={`mobile-menu ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen} inert={!menuOpen}>
         <div className="mobile-menu-inner">
-          <p className="mobile-menu-tag">TRIỂN LÃM SỐ — VIỆT NAM ĐƯƠNG ĐẠI</p>
-          <nav className="mobile-nav" aria-label="Mobile Navigation">
+          <p className="mobile-menu-tag">TRIỂN LÃM ẢNH VIỆT NAM</p>
+          <nav className="mobile-nav" aria-label="Điều hướng trên điện thoại">
             <a href="#heritage" onClick={(e: any) => handleNavClick(e, '#heritage')}>
-              <span>01 / DI SẢN TRƯỜNG TỒN</span>
+              <span>01 / DI SẢN</span>
               <span className="arrow">↗</span>
             </a>
             <a href="#modern-city" onClick={(e: any) => handleNavClick(e, '#modern-city')}>
-              <span>02 / ĐÔ THỊ ĐƯƠNG ĐẠI</span>
+              <span>02 / ĐÔ THỊ</span>
               <span className="arrow">↗</span>
             </a>
             <a href="#everyday" onClick={(e: any) => handleNavClick(e, '#everyday')}>
-              <span>03 / NHỊP SỐNG ĐỜI THƯỜNG</span>
+              <span>03 / ĐỜI THƯỜNG</span>
               <span className="arrow">↗</span>
             </a>
             <a href="#playground" onClick={(e: any) => handleNavClick(e, '#playground')}>
-              <span>04 / GSAP MOTION PLAYGROUND</span>
+              <span>04 / MOTION LAB</span>
               <span className="arrow">↗</span>
             </a>
             <a href="#developer" onClick={(e: any) => handleNavClick(e, '#developer')}>
-              <span>05 / 0CUONG & CREDITS</span>
+              <span>05 / TÁC GIẢ & NGUỒN ẢNH</span>
               <span className="arrow">↗</span>
             </a>
           </nav>
           <div className="mobile-menu-footer">
-            <p>MOTION-LAB × VIETNAMESE CONTEMPORARY CULTURE</p>
+            <p>MOTION-LAB · 0CUONG</p>
             <p className="coords">21°02'N 105°51'E • 10°46'N 106°42'E</p>
           </div>
         </div>
