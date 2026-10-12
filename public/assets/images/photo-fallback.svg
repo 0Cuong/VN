@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="fallback-title fallback-desc">
+  <title id="fallback-title">Tư liệu hình ảnh đang sẵn sàng</title>
+  <desc id="fallback-desc">Tác phẩm đồ họa vector lấy cảm hứng từ nghệ thuật sơn mài truyền thống và địa hình Việt Nam.</desc>
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#141414"/>
+      <stop offset="100%" stop-color="#1E1C1A"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#B69A62"/>
+      <stop offset="100%" stop-color="#E2CCA0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="1000" fill="url(#bgGrad)"/>
+
+  <!-- Mountain silhouettes inspired by Ba Vi & Northern delta -->
+  <path d="M0 760 L380 500 L640 680 L1020 310 L1600 700 V1000 H0 Z" fill="#242220" opacity="0.9"/>
+  <path d="M0 840 L420 630 L720 780 L1140 520 L1600 760 V1000 H0 Z" fill="#2C2723" opacity="0.95"/>
+
+  <!-- Lacquer sun / crimson moon symbol -->
+  <circle cx="1200" cy="260" r="92" fill="#B52B26" opacity="0.92"/>
+
+  <!-- Gold horizon line -->
+  <path d="M0 890 H1600" stroke="url(#goldGrad)" stroke-opacity="0.6" stroke-width="2"/>
+
+  <!-- Typography & Identity -->
+  <text x="100" y="130" fill="#B69A62" font-family="'DM Mono', monospace" font-size="20" letter-spacing="6">VN // NỀN TẢNG TRI THỨC DI SẢN</text>
+  <text x="100" y="905" fill="#F4F0E8" font-family="'Playfair Display', Georgia, serif" font-size="34">Tư liệu văn hóa và lịch sử đang được kết nối</text>
+  <text x="100" y="945" fill="#85847F" font-family="sans-serif" font-size="16">Hệ thống luôn bảo toàn trải nghiệm học tập và nghiên cứu thực tế</text>
+</svg>
