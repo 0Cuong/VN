@@ -91,7 +91,7 @@ export default function Header({ motionActive, onToggleMotion }: HeaderProps) {
       </header>
 
       {/* Mobile Drawer */}
-      <div className={`mobile-menu ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen}>
+      <div className={`mobile-menu ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen} inert={!menuOpen}>
         <div className="mobile-menu-inner">
           <p className="mobile-menu-tag">TRIỂN LÃM SỐ — VIỆT NAM ĐƯƠNG ĐẠI</p>
           <nav className="mobile-nav" aria-label="Mobile Navigation">

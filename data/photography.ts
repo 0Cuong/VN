@@ -34,7 +34,7 @@ export const HERO_PHOTO: PhotoItem = {
   license: 'CC BY-SA 4.0',
   sourceUrl: 'https://en.wikipedia.org/wiki/Hanoi',
   imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Hanoi_skyline_with_Ba_Vi_Mountain.jpg',
-  fallbackUrl: '/assets/images/hero-hanoi.svg',
+  fallbackUrl: '/assets/images/photo-fallback.svg',
   exif: {
     focal: '85mm',
     aperture: 'f/8.0',
@@ -58,7 +58,7 @@ export const HERITAGE_PHOTOS: PhotoItem[] = [
     license: 'CC BY-SA 4.0',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Incense_in_Vietnam.jpg',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/2/21/Incense_in_Vietnam.jpg',
-    fallbackUrl: '/assets/images/heritage-incense.svg',
+    fallbackUrl: '/assets/images/photo-fallback.svg',
     exif: {
       focal: '35mm',
       aperture: 'f/4.0',
@@ -80,7 +80,7 @@ export const HERITAGE_PHOTOS: PhotoItem[] = [
     license: 'CC BY-SA 3.0',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Hoi_An_Laternen_und_Lampions_(39543426861).jpg',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Hoi_An_Laternen_und_Lampions_%2839543426861%29.jpg',
-    fallbackUrl: '/assets/images/heritage-hoian.svg',
+    fallbackUrl: '/assets/images/photo-fallback.svg',
     exif: {
       focal: '50mm',
       aperture: 'f/1.8',
@@ -102,7 +102,7 @@ export const HERITAGE_PHOTOS: PhotoItem[] = [
     license: 'CC BY-SA 4.0',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:St._Joseph%27s_Cathedral_-_Hanoi,_Vietnam.jpg',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/8d/St._Joseph%27s_Cathedral_-_Hanoi%2C_Vietnam.jpg',
-    fallbackUrl: '/assets/images/heritage-cathedral.svg',
+    fallbackUrl: '/assets/images/photo-fallback.svg',
     exif: {
       focal: '24mm',
       aperture: 'f/5.6',
@@ -124,7 +124,7 @@ export const HERITAGE_PHOTOS: PhotoItem[] = [
     license: 'CC BY 2.0',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Th%C3%AA_H%C3%BAc_bridge_with_flags.jpg',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Th%C3%AA_H%C3%BAc_bridge_with_flags.jpg',
-    fallbackUrl: '/assets/images/hero-hanoi.svg',
+    fallbackUrl: '/assets/images/photo-fallback.svg',
     exif: {
       focal: '45mm',
       aperture: 'f/4.5',
@@ -149,7 +149,7 @@ export const MODERN_CITY_PHOTOS: PhotoItem[] = [
     license: 'CC BY 2.0',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Ho_Chi_Minh_City_panorama_2019.jpg',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Ho_Chi_Minh_City_panorama_2019.jpg',
-    fallbackUrl: '/assets/images/city-skyline.svg',
+    fallbackUrl: '/assets/images/photo-fallback.svg',
     exif: {
       focal: '28mm',
       aperture: 'f/8.0',
@@ -171,7 +171,7 @@ export const MODERN_CITY_PHOTOS: PhotoItem[] = [
     license: 'CC BY-SA 4.0',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:The_Landmark_81_at_night.jpg',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/The_Landmark_81_at_night.jpg',
-    fallbackUrl: '/assets/images/city-landmark81.svg',
+    fallbackUrl: '/assets/images/photo-fallback.svg',
     exif: {
       focal: '24mm',
       aperture: 'f/4.0',
@@ -193,7 +193,7 @@ export const MODERN_CITY_PHOTOS: PhotoItem[] = [
     license: 'CC BY 3.0',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Traffic_In_Saigon_(244218359).jpeg',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Traffic_In_Saigon_%28244218359%29.jpeg',
-    fallbackUrl: '/assets/images/city-traffic.svg',
+    fallbackUrl: '/assets/images/photo-fallback.svg',
     exif: {
       focal: '50mm',
       aperture: 'f/5.6',
@@ -218,7 +218,7 @@ export const EVERYDAY_PHOTOS: PhotoItem[] = [
     license: 'CC BY-SA 3.0',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Saigon_cafe_filtre_01.jpg',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/32/Saigon_cafe_filtre_01.jpg',
-    fallbackUrl: '/assets/images/everyday-coffee.svg',
+    fallbackUrl: '/assets/images/photo-fallback.svg',
     exif: {
       focal: '50mm',
       aperture: 'f/2.8',
@@ -240,7 +240,7 @@ export const EVERYDAY_PHOTOS: PhotoItem[] = [
     license: 'CC BY 2.0',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Lady_in_white_ao_dai,_Hanoi_(18538703922).jpg',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Lady_in_white_ao_dai%2C_Hanoi_%2818538703922%29.jpg',
-    fallbackUrl: '/assets/images/everyday-aodai.svg',
+    fallbackUrl: '/assets/images/photo-fallback.svg',
     exif: {
       focal: '70mm',
       aperture: 'f/2.8',
@@ -262,7 +262,7 @@ export const EVERYDAY_PHOTOS: PhotoItem[] = [
     license: 'CC BY-SA 4.0',
     sourceUrl: 'https://commons.wikimedia.org/wiki/File:Hanoi_Opera_House_2018_b.jpg',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/60/Hanoi_Opera_House_2018_b.jpg',
-    fallbackUrl: '/assets/images/heritage-cathedral.svg',
+    fallbackUrl: '/assets/images/photo-fallback.svg',
     exif: {
       focal: '35mm',
       aperture: 'f/4.0',
