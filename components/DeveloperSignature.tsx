@@ -1,9 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ALL_ARTWORKS, type PhotoItem } from '../data/photography';
 
 export default function DeveloperSignature() {
   const [showCreditsModal, setShowCreditsModal] = useState(false);
+
+  useEffect(() => {
+    if (showCreditsModal) {
+      const prevOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setShowCreditsModal(false);
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        document.body.style.overflow = prevOverflow;
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [showCreditsModal]);
 
   const handleScrollTop = (e: React.MouseEvent) => {
     e.preventDefault();

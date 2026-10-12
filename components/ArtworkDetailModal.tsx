@@ -41,6 +41,17 @@ export default function ArtworkDetailModal({
     }
   }, [artwork?.id]);
 
+  // Prevent background page scroll while modal is open
+  useEffect(() => {
+    if (artwork) {
+      const prevOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = prevOverflow;
+      };
+    }
+  }, [artwork]);
+
   if (!artwork) return null;
 
   const currentIndex = allArtworks.findIndex((item) => item.id === artwork.id);

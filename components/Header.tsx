@@ -62,7 +62,7 @@ export default function Header({
               <span className="nav-num">03</span> Đời thường
             </a>
             <a href="#playground" onClick={(e) => handleNavClick(e, '#playground')}>
-              <span className="nav-num">04</span> Motion Lab
+              <span className="nav-num">04</span> Chuyển động
             </a>
             <a href="#developer" onClick={(e) => handleNavClick(e, '#developer')}>
               <span className="nav-num">05</span> Tác giả & Bản quyền
@@ -121,7 +121,7 @@ export default function Header({
               <span className="arrow">↗</span>
             </a>
             <a href="#playground" onClick={(e) => handleNavClick(e, '#playground')}>
-              <span>04 / PHÒNG THÍ NGHIỆM GSAP</span>
+              <span>04 / DẤU ẤN CHUYỂN ĐỘNG</span>
               <span className="arrow">↗</span>
             </a>
             <a href="#developer" onClick={(e) => handleNavClick(e, '#developer')}>

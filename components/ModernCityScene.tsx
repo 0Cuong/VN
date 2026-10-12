@@ -74,6 +74,23 @@ export default function ModernCityScene({ motionActive, onOpenArtwork }: ModernC
       });
     });
 
+    // Mobile Vertical Flow Reveals
+    mm.add('(max-width: 1023px)', () => {
+      gsap.utils.toArray<HTMLElement>('.city-slide').forEach((slide) => {
+        gsap.from(slide, {
+          y: 36,
+          opacity: 0,
+          duration: 0.85,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: slide,
+            start: 'top 85%',
+            once: true,
+          },
+        });
+      });
+    });
+
     return () => mm.revert();
   }, { scope: containerRef, dependencies: [motionActive], revertOnUpdate: true });
 
@@ -135,7 +152,7 @@ export default function ModernCityScene({ motionActive, onOpenArtwork }: ModernC
               <p className="slide-desc">{skyline.narrative}</p>
               <div className="slide-exif">
                 <span>📍 {skyline.location}</span>
-                <span>📷 {skyline.coordinates}</span>
+                <span>📅 {skyline.year}</span>
               </div>
               <button
                 className="card-action-btn"

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { EVERYDAY_PHOTOS, type PhotoItem } from '../data/photography';
@@ -10,13 +10,12 @@ interface EverydaySceneProps {
 }
 
 export default function EverydayScene({ motionActive, onOpenArtwork }: EverydaySceneProps) {
-  const [selectedPhoto, setSelectedPhoto] = useState<PhotoItem>(EVERYDAY_PHOTOS[0]);
   const sectionRef = useRef<HTMLElement>(null);
-  const detailRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     if (!motionActive || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    // Header reveal
     gsap.from('.everyday-intro .reveal-fade', {
       y: 30,
       opacity: 0,
@@ -25,35 +24,50 @@ export default function EverydayScene({ motionActive, onOpenArtwork }: EverydayS
       ease: 'power3.out',
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: 'top 75%',
+        start: 'top 78%',
       },
     });
 
-    gsap.from('.everyday-thumb-btn', {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.08,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.everyday-selector-track',
-        start: 'top 85%',
-      },
+    // Story items reveal in sequence
+    const storyItems = gsap.utils.toArray<HTMLElement>('.everyday-story-item');
+    storyItems.forEach((item) => {
+      const media = item.querySelector('.everyday-story-media');
+      const content = item.querySelector('.everyday-narrative-box');
+      const img = item.querySelector('.photo-img');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 80%',
+          once: true,
+        },
+      });
+
+      tl.fromTo(
+        media,
+        { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)', opacity: 0.4 },
+        { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', opacity: 1, duration: 1.2, ease: 'power3.out' }
+      ).from(
+        content,
+        { y: 32, opacity: 0, duration: 0.8, ease: 'power2.out' },
+        '-=0.7'
+      );
+
+      // Subtle parallax on the image
+      if (img) {
+        gsap.to(img, {
+          yPercent: -8,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.6,
+          },
+        });
+      }
     });
   }, { scope: sectionRef, dependencies: [motionActive], revertOnUpdate: true });
-
-  const handleSelectPhoto = (photo: PhotoItem) => {
-    if (selectedPhoto.id === photo.id) return;
-    setSelectedPhoto(photo);
-
-    if (detailRef.current && motionActive && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      gsap.fromTo(
-        detailRef.current,
-        { opacity: 0.4, y: 16 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
-      );
-    }
-  };
 
   return (
     <section className="everyday-section section-light" ref={sectionRef} id="everyday" aria-labelledby="everyday-title">
@@ -74,72 +88,63 @@ export default function EverydayScene({ motionActive, onOpenArtwork }: EverydayS
           </p>
         </header>
 
-        {/* Interactive Curated Focal Showcase with key prop to prevent layout/load glitch */}
-        <div className="everyday-showcase" ref={detailRef}>
-          <div className="everyday-main-display">
-            <ImageWithFallback
-              key={selectedPhoto.id}
-              photo={selectedPhoto}
-              aspectRatio="16/10"
-              className="everyday-featured-img"
-              showExif={false}
-              onOpenDetail={() => onOpenArtwork(selectedPhoto)}
-            />
-
-            <div className="everyday-narrative-box">
-              <div className="narrative-tag">{selectedPhoto.tag}</div>
-              <h3 className="narrative-title">{selectedPhoto.titleVi}</h3>
-              <p className="narrative-sub">{selectedPhoto.subtitle}</p>
-              <p className="narrative-body">{selectedPhoto.narrative}</p>
-
-              <div className="narrative-meta-footer">
-                <div className="meta-col">
-                  <span className="meta-label">ĐỊA ĐIỂM</span>
-                  <span className="meta-val">{selectedPhoto.location}</span>
+        {/* Editorial Story Stream: All 3 moments revealed in natural scroll flow */}
+        <div className="everyday-story-stream">
+          {EVERYDAY_PHOTOS.map((photo, index) => {
+            const isReversed = index % 2 === 1;
+            return (
+              <article
+                key={photo.id}
+                className={`everyday-story-item ${isReversed ? 'is-reversed' : ''}`}
+              >
+                <div className="everyday-story-media">
+                  <ImageWithFallback
+                    photo={photo}
+                    aspectRatio={index === 1 ? '4/5' : '16/10'}
+                    className="everyday-featured-img"
+                    showExif={false}
+                    onOpenDetail={() => onOpenArtwork(photo)}
+                  />
                 </div>
-                <div className="meta-col">
-                  <span className="meta-label">TOẠ ĐỘ</span>
-                  <span className="meta-val">{selectedPhoto.coordinates}</span>
-                </div>
-                <div className="meta-col">
-                  <span className="meta-label">THÔNG SỐ ỐNG KÍNH</span>
-                  <span className="meta-val">
-                    {selectedPhoto.exif.focal} • {selectedPhoto.exif.aperture} • ISO {selectedPhoto.exif.iso}
-                  </span>
-                </div>
-              </div>
 
-              <div className="narrative-action-bar">
-                <button
-                  className="btn btn-primary"
-                  onClick={() => onOpenArtwork(selectedPhoto)}
-                >
-                  <span>Khám phá tác phẩm</span>
-                  <span className="btn-icon">→</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+                <div className="everyday-narrative-box">
+                  <div className="narrative-tag">
+                    <span className="narrative-idx">0{index + 1} //</span> {photo.tag}
+                  </div>
+                  <h3 className="narrative-title">{photo.titleVi}</h3>
+                  <p className="narrative-sub">{photo.subtitle}</p>
+                  <p className="narrative-body">{photo.narrative}</p>
 
-        {/* Thumbnail Selector */}
-        <div className="everyday-selector-track" role="tablist" aria-label="Chọn khoảnh khắc đời thường">
-          {EVERYDAY_PHOTOS.map((item, index) => (
-            <button
-              key={item.id}
-              role="tab"
-              aria-selected={selectedPhoto.id === item.id}
-              className={`everyday-thumb-btn ${selectedPhoto.id === item.id ? 'is-active' : ''}`}
-              onClick={() => handleSelectPhoto(item)}
-            >
-              <span className="thumb-idx">0{index + 1}</span>
-              <div className="thumb-content">
-                <span className="thumb-title">{item.titleVi}</span>
-                <span className="thumb-tag">{item.tag}</span>
-              </div>
-              <span className="thumb-indicator" />
-            </button>
-          ))}
+                  <div className="narrative-meta-footer">
+                    <div className="meta-col">
+                      <span className="meta-label">ĐỊA ĐIỂM</span>
+                      <span className="meta-val">{photo.location}</span>
+                    </div>
+                    <div className="meta-col">
+                      <span className="meta-label">NĂM CHỤP</span>
+                      <span className="meta-val">{photo.year}</span>
+                    </div>
+                    <div className="meta-col">
+                      <span className="meta-label">THÔNG SỐ ỐNG KÍNH</span>
+                      <span className="meta-val">
+                        {photo.exif.focal} • {photo.exif.aperture} • ISO {photo.exif.iso}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="narrative-action-bar">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => onOpenArtwork(photo)}
+                    >
+                      <span>Khám phá tác phẩm</span>
+                      <span className="btn-icon">→</span>
+                    </button>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

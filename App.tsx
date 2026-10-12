@@ -14,13 +14,28 @@ import DeveloperSignature from './components/DeveloperSignature';
 import CustomCursor from './components/CustomCursor';
 import SpaceScene from './components/SpaceScene';
 import ArtworkDetailModal from './components/ArtworkDetailModal';
+import CanvasMotionLayer from './components/CanvasMotionLayer';
 import { ALL_ARTWORKS, type PhotoItem } from './data/photography';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, useGSAP);
 
+type Scene = 'hero' | 'heritage' | 'city' | 'everyday' | 'outro';
+
+// Maps section IDs to canvas scenes
+const SECTION_SCENE_MAP: Array<{ id: string; scene: Scene }> = [
+  { id: 'top',         scene: 'hero' },
+  { id: 'heritage',    scene: 'heritage' },
+  { id: 'modern-city', scene: 'city' },
+  { id: 'everyday',    scene: 'everyday' },
+  { id: 'playground',  scene: 'outro' },
+  { id: 'developer',   scene: 'outro' },
+];
+
 export default function App() {
   const [motionActive, setMotionActive] = useState<boolean>(true);
   const [selectedArtwork, setSelectedArtwork] = useState<PhotoItem | null>(null);
+  const [currentScene, setCurrentScene] = useState<Scene>('hero');
+  const [pageScrollProgress, setPageScrollProgress] = useState(0);
 
   const appRef = useRef<HTMLDivElement>(null);
 
@@ -39,6 +54,42 @@ export default function App() {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
+  // Scene detection via IntersectionObserver — no scroll hijacking
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    SECTION_SCENE_MAP.forEach(({ id, scene }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setCurrentScene(scene);
+            }
+          });
+        },
+        { threshold: 0.25 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    // Scroll progress (passive, no hijacking)
+    const onScroll = () => {
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      if (docH > 0) {
+        setPageScrollProgress(Math.min(window.scrollY / docH, 1));
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      observers.forEach((o) => o.disconnect());
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
   const { contextSafe } = useGSAP(() => {
     ScrollTrigger.defaults({
       markers: false,
@@ -51,10 +102,6 @@ export default function App() {
         ScrollTrigger.refresh();
       }, { once: true });
     });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t: any) => t.kill());
-    };
   }, { scope: appRef });
 
   const handleExplore = contextSafe(() => {
@@ -69,9 +116,9 @@ export default function App() {
     setMotionActive((prev) => {
       const next = !prev;
       if (!next) {
-        gsap.globalTimeline.pause();
+        ScrollTrigger.getAll().forEach((st) => st.disable(false, true));
       } else {
-        gsap.globalTimeline.play();
+        ScrollTrigger.getAll().forEach((st) => st.enable());
         ScrollTrigger.refresh();
       }
       return next;
@@ -79,7 +126,14 @@ export default function App() {
   };
 
   return (
-    <div className={`app-wrapper ${motionActive ? 'motion-enabled' : 'motion-reduced'}`} ref={appRef} id="top">
+    <div className={`app-wrapper ${motionActive ? 'motion-enabled' : 'motion-reduced'}`} ref={appRef}>
+      {/* Canvas 2D decorative motion layer — sits behind everything */}
+      <CanvasMotionLayer
+        scene={currentScene}
+        motionActive={motionActive}
+        scrollProgress={pageScrollProgress}
+      />
+
       {/* Subtle photographic film grain overlay */}
       <div className="film-grain-overlay" aria-hidden="true" />
 

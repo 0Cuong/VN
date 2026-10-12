@@ -127,13 +127,32 @@ export default function SpaceScene({ paused = false }: SpaceSceneProps) {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.65));
     };
 
+    let isIntersecting = false;
+    let isTabVisible = !document.hidden;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isIntersecting = entry.isIntersecting;
+      if (isIntersecting && isTabVisible && !pausedRef.current && !reducedMotion) {
+        startAnimation();
+      }
+    }, { threshold: 0.05 });
+    observer.observe(host);
+
+    const onVisibilityChange = () => {
+      isTabVisible = !document.hidden;
+      if (isIntersecting && isTabVisible && !pausedRef.current && !reducedMotion) {
+        startAnimation();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
     host.addEventListener('pointermove', onPointer, { passive: true });
     window.addEventListener('resize', resize);
     resize();
 
     const animate = () => {
       frame = 0;
-      if (!reducedMotion && !pausedRef.current) {
+      if (!reducedMotion && !pausedRef.current && isIntersecting && isTabVisible) {
         targetX += (pointerY - targetX) * 0.025;
         targetY += (pointerX - targetY) * 0.025;
         sculpture.rotation.x = targetX * 0.55 + Math.sin(performance.now() * 0.0002) * 0.08;
@@ -143,20 +162,25 @@ export default function SpaceScene({ paused = false }: SpaceSceneProps) {
         stars.rotation.x = targetX * 0.08;
       }
       renderer.render(scene, camera);
-      if (!reducedMotion && !pausedRef.current) frame = window.requestAnimationFrame(animate);
+      if (!reducedMotion && !pausedRef.current && isIntersecting && isTabVisible) {
+        frame = window.requestAnimationFrame(animate);
+      }
     };
 
     const startAnimation = () => {
-      if (!reducedMotion && !pausedRef.current && frame === 0) frame = window.requestAnimationFrame(animate);
+      if (!reducedMotion && !pausedRef.current && isIntersecting && isTabVisible && frame === 0) {
+        frame = window.requestAnimationFrame(animate);
+      }
     };
 
     startAnimationRef.current = startAnimation;
     renderer.render(scene, camera);
-    startAnimation();
 
     return () => {
       window.cancelAnimationFrame(frame);
       startAnimationRef.current = null;
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       host.removeEventListener('pointermove', onPointer);
       window.removeEventListener('resize', resize);
       torusGeometry.dispose();

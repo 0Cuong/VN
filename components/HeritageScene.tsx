@@ -126,7 +126,6 @@ export default function HeritageScene({ motionActive, onOpenArtwork }: HeritageS
               <p className="heritage-card-desc">{incense.narrative}</p>
               <div className="heritage-card-meta">
                 <span>📍 {incense.location}</span>
-                <span>✦ {incense.coordinates}</span>
               </div>
               <button
                 className="card-action-btn"
@@ -153,7 +152,6 @@ export default function HeritageScene({ motionActive, onOpenArtwork }: HeritageS
               <p className="heritage-card-desc">{hoian.narrative}</p>
               <div className="heritage-card-meta">
                 <span>📍 {hoian.location}</span>
-                <span>✦ {hoian.coordinates}</span>
               </div>
               <button
                 className="card-action-btn"
@@ -180,7 +178,6 @@ export default function HeritageScene({ motionActive, onOpenArtwork }: HeritageS
               <p className="heritage-card-desc">{cathedral.narrative}</p>
               <div className="heritage-card-meta">
                 <span>📍 {cathedral.location}</span>
-                <span>✦ {cathedral.coordinates}</span>
               </div>
               <button
                 className="card-action-btn"
@@ -207,7 +204,6 @@ export default function HeritageScene({ motionActive, onOpenArtwork }: HeritageS
               <p className="heritage-card-desc">{thehuc.narrative}</p>
               <div className="heritage-card-meta">
                 <span>📍 {thehuc.location}</span>
-                <span>✦ {thehuc.coordinates}</span>
               </div>
               <button
                 className="card-action-btn"
